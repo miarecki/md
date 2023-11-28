@@ -2,10 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import fsolve
 
-# Parameters
 r, k, h, t  = (0.01, 10, 0.5, 200)
 
-# Decay function
 def decay_fun(x, y):
     return r * x * (k - y)
 
