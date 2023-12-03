@@ -40,7 +40,7 @@ A = 0.5
 
 
 
-#NEED
+#porownanie metod
 '''
 for method in ["left", "right", "trapezium"]:
     for y_0 in np.arange(-.5, 1.5, h):
@@ -82,7 +82,7 @@ for y_0 in [1/5, 4/5, 11/10]:
 
 
 
-'''takes a min
+'''CZASY    /// takes a min
 h = 0.0001
 times = []
 for method in ["left", "right", "trapezium"]:
@@ -95,7 +95,7 @@ print(times)
 '''
 
 
-'''
+''' diagram slupkowy
 data = [['left', 0.2, 0.07855], ['left', 0.8, 0.06303], ['left', 1.33, 0.07817],
         ['right', 0.2, 6.34245], ['right', 0.8, 6.13749], ['right', 1.33, 6.16931],
         ['trapezium', 0.2, 8.39975], ['trapezium', 0.8, 7.99121], ['trapezium', 1.33, 8.13473]]
@@ -111,8 +111,7 @@ ax.bar(range(len(data)), execution_times, color=['blue', 'green', 'red']*3)
 ax.set_xticks(range(len(data)))
 ax.set_xticklabels([f"{method}\n{y}" for method, y, _ in data])
 ax.set_ylabel('Czas wykonania (s)')
-#ax.set_title('Execution Time for Different Methods and Initial Values')
 
-# Display the plot
+
 plt.show()
 '''

@@ -30,9 +30,9 @@ def euler_trapezium(y, a, b, h):
 
 fig, axs = plt.subplots(3, 3, figsize=(15, 15))
 
-cnt_1 = 0
+wiersz = 0
 for tau in [1.5, 11.5, 17]:
-    cnt_2 = 0
+    kolumna = 0
     for i in range(3):
 
         y_left = np.arange(0, t + h, h)
@@ -42,17 +42,13 @@ for tau in [1.5, 11.5, 17]:
         for j in range(3):
 
             y_left[:int(tau / h)] = init_random + j + 1
-            
-
             y_left = euler_left(y_left, int(tau / h), int(t / h) + 1, h)
+            axs[wiersz, kolumna].plot(np.arange(0, t + h, h), y_left, label=f'j = {j}')
+            axs[wiersz, kolumna].set_title(f'$\\tau = {tau}$')
 
-            axs[cnt_1, cnt_2].plot(np.arange(0, t + h, h), y_left, label=f'j = {j}')
+        kolumna += 1
 
-            axs[cnt_1, cnt_2].set_title(f'$\\tau = {tau}$')
-
-        cnt_2 += 1
-
-    cnt_1 += 1
+    wiersz += 1
 
 plt.legend()
 plt.show()
