@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import datetime, timedelta
 
 # SIR Model with births and deaths
 
@@ -64,10 +66,10 @@ if __name__ == '__main__':
 
     # Scenarios
     scenarios = [
-        {"label": "Mało zarażeń, bardzo zaraźliwa", "b": 0.3, "I0": 5.0},
+        {"label": "Mało zarażeń, bardzo zaraźliwa", "b": 1.0, "I0": 5.0},
         {"label": "Dużo zarażeń, bardzo zaraźliwa", "b": 1.0, "I0": 50.0},
-        {"label": "Mało zarażeń, mało zaraźliwa", "b": 0.1, "I0": 5.0},
-        {"label": "Dużo zarażeń, mało zaraźliwa", "b": 0.5, "I0": 50.0},
+        {"label": "Mało zarażeń, mało zaraźliwa", "b": 0.2, "I0": 5.0},
+        {"label": "Dużo zarażeń, mało zaraźliwa", "b": 0.2, "I0": 50.0},
     ]
 
     # Plotting
@@ -76,10 +78,20 @@ if __name__ == '__main__':
     for scenario in scenarios:
         S0, I0, b = N - scenario["I0"], scenario["I0"], scenario["b"]
         results_rk4 = RK4(h, S0, I0, m, N, b, g, num_steps)
-        plt.plot(results_rk4[:, 1], label=f'{scenario["label"]} (RK4)')
+
+        plt.plot(results_rk4[:, 1], label=f'{scenario["label"]}, $I_0$ = {I0}, beta = {b}')
+
+    # Define x-ticks and labels
+    today = datetime.today()
+    x_ticks = np.arange(0, num_steps + 1, 50)
+    x_labels = [(today + timedelta(days=int(x))).strftime('%Y-%m-%d') for x in x_ticks]
+
+    # Set x-ticks and labels
+    plt.xticks(x_ticks, x_labels, rotation=45, ha='right')
 
     plt.title("Model SIR z przyrostem naturalnym")
-    plt.xlabel("Czas (dni)")
+    plt.xlabel("Czas")
     plt.ylabel("Liczba zarażonych")
     plt.legend()
+    plt.tight_layout()  # Adjust layout for better readability
     plt.show()
