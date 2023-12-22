@@ -5,7 +5,7 @@ from matplotlib.widgets import Slider
 # Parameters
 a = 0.7
 tau = 12.5
-R = 2.5
+#R = 2.5
 R = 0.1
 
 # Initial conditions
